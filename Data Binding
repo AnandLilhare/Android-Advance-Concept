@@ -1,0 +1,134 @@
+Data Binding 
+
+1. Data binding eliminates findViewByid(), making code concise, making code eaiser to read and maintain.
+2. Recognizing the error at the compile time.
+3. Improve the app performance 
+
+Implementation 
+1. Need to enble the data binding  -> gradle ->
+    buildFeatures {
+        dataBinding true
+    }
+} and syn the gradle.
+2. Wrap the layout with layout tag.
+   <layout></layout>
+3. Now create refernce varible of databindng on activity.
+   private lateinit var databinding : ActivityMainBinding
+4. Now remove setContainView() method and use databind object
+   databinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+5. Now you can remove findViewByid() object and use databinding object
+  databinding.submitButton
+6. Create data class in activiyt
+   <data> 
+    <variable
+      name = "student"
+      type = "come.demo.Student"
+      >
+   </data>
+
+ 7. Now use this varible to text faild
+    android:text = "@{Student.name}"
+ 8. Now assinge varible student to binding varible
+     binding.student = getStudent()
+------
+Section Summery(Short Note)
+Steps of generating a data binding object for a xml layout and using it.
+
+
+1) Enable Data Binding at the end of the "android" block of  the app level build.gradle file.
+android {
+   ..........
+   ..........
+   ..........
+   buildFeatures {
+        dataBinding true
+    }
+}
+2) Add layout tags as the outermost tags of the xml layout.
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+        ..............................................
+        ..............................................
+        ..............................................
+        ..............................................
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+3) Get the data binding object of the layout using DataBindingUtil.(In the Activity)
+class MainActivity : AppCompatActivity() {
+ 
+    private lateinit var binding: ActivityMainBinding
+ 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+ 
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+       
+    }
+ 
+ 
+}
+4) Use properties of data binding object.
+Ids in the xml layout turns in to property names in the data binding object. 
+
+Eg :
+
+  <Button     android:id="@+id/control_button"   
+
+...................................
+
+...................................
+
+...................................
+
+/>
+
+we can use that using property name "controlButton"
+
+binding.controlButton.setOnClickListener {
+    startOrStopProgressBar()
+}
+ 
+
+5) How to pass an object(data) to the xml layout and use them directly.
+   In xml layout Define a variable for the object.
+
+   <data>
+    <variable
+        name="student"
+        type="com.anushka.bindingdemo3.Student" />
+</data>
+In the activity, assign the data object to that defined layout variable
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.student = getStudent()
+    }
+ 
+    private fun getStudent():Student{
+        return Student(1,"Alex","alex@gmail.com")
+    }
+}
+ In xml layout   Use the properties of the object in xml view components using binding expressions. 
+
+    <TextView
+    android:id="@+id/name_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    .............
+    android:text="@{student.name}"
+    .............
+    .............
+    .............
+    app:layout_constraintVertical_bias="0.415" />
+
+
+

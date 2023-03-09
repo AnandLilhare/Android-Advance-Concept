@@ -1,0 +1,45 @@
+Interview Questions
+
+Data Binding
+1) Can I use findViewById() for all my Android Projects?
+    Yes you can, you can build any Android Project using findViewById(). That's what we had been doing during the early days of  Android.
+
+Using modern ways we can reduce the number of code lines, make code more readable, improve the performances and make code base more organised.
+
+
+
+2) What is Kotlin Synthetic?
+   Kotlin Synthetic(extensions) was a shorthand way used by developers to avoid findViewById() and directly call to the views using their ids. We added a Kotlin plugin for that in the app level gradle file. Since this method caused a lot of unexpected errors, Google deprecated it in 2021.
+
+
+
+3) What is ViewBinding?
+View Binding is a light weight version of Data binding. It only binds views to the code.
+
+But data binding do both. Binding data  from code to views and binding views to the code. And data binding has a lot of other applications.
+
+Once you learnt Data Binding, View Binding would be much easier to learn(nothing new at all).
+
+Considering our project's requirements we should decide whether or not use Data Binding(or View Binding)
+
+During later sections of this course, we will discuss about view binding and we will use view binding for our complete project examples.
+
+
+
+4) What is Jetpack Compose?
+With jetpack compose we do not need to use XML. We write all the codes to create views using Kotlin.
+
+But, you need a very good(Advanced Level) Kotlin and Android development knowledge to use Jetpack Compose.
+
+XML is much quicker to use(drag and drop, attributes window,..) and easier to learn/understand.
+
+Jetpack compose has very high performance and lot of other advantages(Kotlin Multiplatform)
+
+We can use both XML and Compose in the same project.
+
+There are millions of Android Projects created using XML(which need continuous maintenance) . Only some developers use Compose for their new projects. So, as an Android Developer you need to master both XML way and Compose way.
+
+I have added a lot of sections to this course to teach you jetpack compose fundamentals as well as practical applications. You will be able to master jetpack compose during later sections of this course.
+
+
+
