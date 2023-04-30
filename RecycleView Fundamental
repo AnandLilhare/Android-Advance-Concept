@@ -1,0 +1,73 @@
+RecycleView Fundamental
+
+RecyclerView makes it easy to efficiently display large sets of data. You supply the data and define how each item looks, and the RecyclerView library dynamically creates the elements when they're needed.
+
+As the name implies, RecyclerView recycles those individual elements. When an item scrolls off the screen, RecyclerView doesn't destroy its view. Instead, RecyclerView reuses the view for new items that have scrolled onscreen. RecyclerView improves performance and your app's responsiveness, and it reduces power consumption.
+
+
+The items in your RecyclerView are arranged by a LayoutManager class. The RecyclerView library provides three layout managers, which handle the most common layout situations:
+
+1. LinearLayoutManager - arranges the items in a one-dimensional list.
+2. GridLayoutManager  - arranges the items in a two-dimensional grid
+3. StaggeredGridLayoutManager  - is similar to GridLayoutManager, but it does not require that items in a row have the same height 
+
+Implement your adapter and view holder
+Once you determine your layout, you need to implement your Adapter and ViewHolder. These two classes work together to define how your data is displayed. The ViewHolder is a wrapper around a View that contains the layout for an individual item in the list. The Adapter creates ViewHolder objects as needed and also sets the data for those views. The process of associating views to their data is called binding.
+
+When you define your adapter, you override three key methods:
+1. onCreateViewHolder(): RecyclerView calls this method whenever it needs to create a new ViewHolder.
+2. onBindViewHolder(): RecyclerView calls this method to associate a ViewHolder with data. The method fetches the appropriate data and uses the data to fill in the view holder's layout
+3. getItemCount(): RecyclerView calls this method to get the size of the dataset.
+
+Interview Question
+
+1. How does a RecyclerView differ from a ListView?
+A RecyclerView is a more advanced and flexible version of a ListView. While a ListView simply displays a list of items, a RecyclerView can also be used to implement more complex lists, such as grids and staggered lists. Additionally, a RecyclerView is more efficient than a ListView, as it uses a ViewHolder to recycle views instead of creating new views for each item in the list.
+
+2. Can you give me some examples of where RecyclerViews can be used in real-world apps?
+RecyclerViews are commonly used in apps that need to display lists of data. This could be a list of items for sale in an ecommerce app, a list of articles in a news app, or a list of friends in a social media app. RecyclerViews are also often used in conjunction with other ViewGroup objects, like SwipeRefreshLayout, to provide a complete user interface.
+
+3. What are the three main components that make up a RecyclerView?
+The three main components that make up a RecyclerView are the LayoutManager, the RecyclerView.Adapter, and the RecyclerView.ViewHolder. The LayoutManager is responsible for managing the layout of the items in the RecyclerView, the RecyclerView.Adapter is responsible for managing the data that is displayed in the RecyclerView, and the RecyclerView.ViewHolder is responsible for managing the individual views that are displayed in the RecyclerView
+
+4. In what ways do RecyclerViews improve upon ListViews?
+RecyclerViews offer a number of advantages over ListViews, including the following:
+
+-They are more flexible and customizable, allowing for a greater degree of control over how the data is displayed.
+-They are more efficient, making better use of resources and reducing lag.
+-They allow for more complex and sophisticated animations and interactions.
+
+5.Can you explain how to implement a RecyclerView in Android Studio?
+RecyclerView is a new widget in Android Studio that allows you to easily create scrollable lists of data. To implement a RecyclerView, you will need to first create a layout file that defines the look of each item in the list. Next, you will need to create a RecyclerView.Adapter that will bind the data to the RecyclerView. Finally, you will need to set the adapter on the RecyclerView.
+
+6. What are the various types of adapters available with RecyclerViews?
+There are three types of adapters available with RecyclerViews:
+
+1. ListAdapter: This is used for displaying a list of items.
+2. GridAdapter: This is used for displaying items in a grid layout.
+3. StaggeredGridAdapter: This is used for displaying items in a staggered grid layout.
+
+7. What’s the difference between ViewGroups and Views?
+A ViewGroup is a container that can hold other Views (and ViewGroups), whereas a View is an individual widget, like a button or a text field. ViewGroups are necessary for creating complex layouts with multiple widgets, but Views can be used on their own if you just need a single widget.
+
+8. How would you handle a situation where an invalid position was given by getAdapterPosition() or getLayoutPosition()?
+If an invalid position is given by getAdapterPosition() or getLayoutPosition(), then the RecyclerView will not be able to display the data correctly. In this case, you would need to either catch the exception that is thrown or use a try/catch block to handle the error.
+
+9.What is an ItemDecoration? How can we add one to our RecyclerView?
+An ItemDecoration is a class that allows us to add special formatting to our RecyclerView items. We can use ItemDecorations to add dividers between our items, or to add special headers or footers to our RecyclerView. To add an ItemDecoration to our RecyclerView, we simply need to create a new instance of the ItemDecoration class and add it to our RecyclerView using the addItemDecoration() method
+
+10. When should you consider using GridLayoutManager instead of LinearLayoutManager?
+GridLayoutManager is best used when you have a large number of items that need to be displayed in a grid. This is typically the case when you are displaying images, as opposed to text. LinearLayoutManager is best used when you have a small number of items that need to be displayed in a linear fashion, such as a list of text.
+
+11. What is a LayoutManager? Why is it useful when working with RecyclerViews?
+A LayoutManager is a class used by RecyclerViews to manage the positioning of items within the view. This class is responsible for measuring and positioning items within the RecyclerView, as well as determining when items need to be recycled and reused. LayoutManagers are useful when working with RecyclerViews because they help to keep the view organized and efficient, while also allowing for a great deal of flexibility in terms of how items are displayed.
+
+12. What is the use of notifyItemInserted(), notifyItemRemoved(), etc.?
+These are some of the methods available in the RecyclerView.NotifyItemInserted() is used to notify the RecyclerView that an item has been inserted at a given position. NotifyItemRemoved() is used to notify the RecyclerView that an item has been removed from a given position. There are many other methods available as well, each with a specific purpose. You can use these methods to keep your RecyclerView up-to-date with the latest data.
+
+13 . What is the importance of setHasStableIds()? Should this always be enabled for all RecyclerViews?
+The setHasStableIds() method is used to tell the RecyclerView that the items in the adapter have stable IDs. This is important for when the RecyclerView is animating changes to the data set, because it can then use those IDs to help determine which items have changed and need to be updated on screen. However, this method should not always be enabled, as it can have a negative impact on performance if the IDs are not actually stable
+
+14.Is it possible to have multiple viewholders within a single RecyclerView?
+Yes, it is possible to have multiple viewholders within a single RecyclerView. This can be useful if you want to display different types of data in the same list. For example, you could have a viewholder for text data and another for images
+

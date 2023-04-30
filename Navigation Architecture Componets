@@ -1,0 +1,53 @@
+Navigation Architecture Componets
+
+Navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within your app. Android Jetpack's Navigation component helps you implement navigation, from simple button clicks to more complex patterns, such as app bars and the navigation drawer.
+
+The Navigation component consists of three key 
+
+1.Navigation graph
+2.NavHostFragement
+3.NavController
+
+setUp Navigation lib in project
+dependencies {
+  def nav_version = "2.5.3"
+  // Java language implementation
+  implementation "androidx.navigation:navigation-fragment:$nav_version"
+  implementation "androidx.navigation:navigation-ui:$nav_version"
+
+  // Kotlin
+  implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+  implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+  // Feature module Support
+  implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+  // Testing Navigation
+  androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
+  // Jetpack Compose Integration
+  implementation "androidx.navigation:navigation-compose:$nav_version"
+}
+
+Navigation Graph
+Navigation occurs between your app's destinations—that is, anywhere in your app to which users can navigate. These destinations are connected via actions.
+
+A navigation graph is a resource file that contains all of your destinations and actions. The graph represents all of your app's navigation paths.
+
+1. To create navigation graph-> select app->Android resources file -> add details
+2. If you see there is new folder will create i.e navigation under res folder.
+
+Navigation Host
+1. it is use to connect other navigatio graph part.
+2. Select and drag NavHostFragment from container in Palette and drop in the activity xml.
+
+Add destinations to the navigation graph
+1.Click at add to destination -> Create new destination -> create fragment as per your requirment.
+
+How to pass date one fragment to another fragement
+1. Create object of bundle and store value of text view.
+2. Now pass the bundle value with it.findNavController().navigate
+
+For Annimation
+1. Click destination link in grap and check attribute property 
+

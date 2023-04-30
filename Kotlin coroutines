@@ -1,0 +1,112 @@
+Kotlin coroutines
+
+
+A coroutine is a concurrency design pattern that you can use on Android to simplify code that executes asynchronously. Coroutines were added to Kotlin in version 1.3 and are based on established concepts from other languages.
+
+Features
+Coroutines is our recommended solution for asynchronous programming on Android. Noteworthy features include the following:
+
+1. Lightweight: 
+2. Fewer memory leaks:
+3. Built-in cancellation support:
+4. Jetpack integration:
+
+Implementation corotines:
+
+1. add the following dependency to your app's build.gradle file:
+dependencies {
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+}
+
+2.Now create coroutones scope that will provide coroutine scope.
+CoroutineScope(Dispatchers.IO).launch {
+                
+            }
+
+ CoroutineScope: is an interface to provide scope to corotine. In kotlin coroutin there is another scope is Golbal scope which are working in whole application lifecycle.
+ 
+ Dispatcher.io is context of coroutine, it decripe the kind of thread that they run on coroutines.
+  Dispatchers.io : Coroutin will run in background thread from a shared pool of on-demand created thread.
+  Dispatchers.Main: it will start from main thread after that it will run in background thread.
+  Dispatchers.Default: it is use for CPU intensive task such as sorting a large list.
+  Dispatchers.Unconfined: this is use for Golbal scope, it'll run in the current thread, but if it is suspended and resumed it will run suspended function's thread.
+
+3. launch is builder to start coroutine.
+  There are four builder
+  a. lunch : it is launch new coroutine without blocking the current thread. We use this builder when coroutine does not return any value.
+  b. async: it is launch new coroutine without blocking the current thread. it is return an instance of deferred value. We use this builder when coroutine does have return any value.
+  c. produce: This builder is for coroutine which produces a stream of element. Returns of instances of receive channel.
+  d. runBlocking: The coroutine we create using this thread will block the thread while the coroutine is executing.
+     Returns a result of type T.
+
+ Structured Concurrency
+
+ It is set of language feature and best practiesed introduce for kotlin coroutine to avoid leak and to manage them productively.
+
+ Switch The Thread Of A Coroutin
+ private suspend fun downloadUserData() {
+        for (i in 1..200000) {
+            withContext(Dispatchers.Main){
+                tvUserMessage.text = "Downloading user $i in ${Thread.currentThread().name}"
+            }
+        }
+
+Coroutin Suspend fuction
+
+In Kotlin Corountinew, whenever a coroutin is suspended, the current stack fram of the function is copied and saved in the memory. 
+When the function resumes after completing its task, the stack frame is copie back from where it was saved and starts running again.
+
+Suspending Fuction.
+1. WithContext
+2. WithTimeout
+3. WithTimeoutOrNull
+4. join
+5. delay
+6. wait
+7. supervisorScope
+8. coroutineScope
+
+If we are going to use a suspending function such as withContext, we have to mark our calling function with suspend modifier.
+
+Async and Wait:
+CoroutineScope(Dispatchers.Main).launch {
+            Log.i("MyTag","Calculation started....")
+
+            val stock1 = async(Dispatchers.IO) {
+                getStock1()
+            }
+            val stock2 = async(Dispatchers.IO) {
+                getStock2()
+            }
+
+            val total = stock1.await()+stock2.await()
+            Toast.makeText(applicationContext,"Total is $total", Toast.LENGTH_LONG).show()
+ 
+        }
+Unstructured Concurrency 
+
+1. Unstructure concurrency does not guarantee to competete all the task of the suspending function before it return.
+2. There is no way to handle expection in the unstructure concurrency.
+
+Structured Concurrency
+Structured Concurrency gaurantees to complete all the work started by corountines within the child scope before the returen of the supending the function.
+1. By using the coroutineScope suspending function, it is resolving the above two unstructrued issue.
+2. Structure concurrency help us to keep track of the task we started and cancel them when needed.
+
+ViewModelScope in Coroutine
+it is a CorotineScope ties with ViewModel.
+LifecycleScope : it is use in activity and framgent to work with lifecycle of acitivity and fragment.
+
+Live Data Builder
+
+var users = liveData(Dispatchers.IO) {
+        val result = usersRepository.getUsers()
+        emit(result)
+    }
+you can use coroutins as Live date 
+
+
+
+
+
+        

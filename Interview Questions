@@ -41,5 +41,66 @@ There are millions of Android Projects created using XML(which need continuous m
 
 I have added a lot of sections to this course to teach you jetpack compose fundamentals as well as practical applications. You will be able to master jetpack compose during later sections of this course.
 
+View Model:
+5. When is the ViewModel's onCleared() called?
+A ViewModel's onCleared() is called when the ViewModel is no longer required.
+It will be called when the app is put into the background and the app process is killed in order to free up the system's memory.
+When the user invokes finish() of an activity, its view model will be cleared(). Also when we click on the back button,  ViewModel of current activity will be cleared (onCleared()  will be invoked)
+
+Q.What is the difference between ViewModel() and AndroidViewModel() ?
+The AndroidViewModel class extends ViewModel class, so it has all the same functionality.
+The only added functionality for AndroidViewModel is that it is context aware, when initialising AndroidViewModel we have to pass the application context as a parameter.
+AndroidViewModel is helpful if we require context to get a system service or have a similar requirement(displaying a Toast message).
+
+class MyAnViewModel(application: Application) : AndroidViewModel(application) {
+   ........
+   ........
+}
+
+6) What is "ViewModelProvider" ?
+We can not construct a ViewModel instance on our own. We need to use the ViewModelProvider utility provided by Android to create instances of ViewModels.
+
+7) When do we need to create a ViewModelFactory class ?
+ViewModelProvider can only instantiate ViewModels with no arg constructors.
+So, if the ViewModel has constructor parameters(arguments) , ViewModelProvider need a little extra support to create instances of it.
+We provide that extra support by creating a Factory class and passing its instance to the ViewModelProvider.
+
+8) When we are extending AndroidViewModel, since it should always has "application" as a constructor parameter, do we need to use a ViewModelFactory ?
+No, if the ViewModel created extending AndroidViewModel, does not have parameters other than "application", we do not need to use a ViewModelFactory for that.
+
+9) What is the onCleared() function of a ViewModel?
+  When a ViewModel object is no longer required, system will call to its onCleared() function to destroy(clear) it.
+  It will be called when the app is put into the background and the app process is killed in order to free up the     
+  system's memory.
+ When the user invokes finish() of an activity, its view model will be cleared().
+Also when we click on the back button, ViewModel of current activity will be cleared (onCleared() will be invoked)
+
+Live Data
+10) Where do we create/generate LiveData?
+We usually define LiveData, inside ViewModel classes.
+Also, supporting libraries like Room and Retrofit allows us to get data directly in LiveData format.
+
+11)From where do we observe LiveData?
+LiveData is a lifecycle-aware observable data holder class.
+In android we have only 3 app components with lifecycles. Activities , fragments and services.
+So, form activities, fragments and services we can observe LiveData.
+
+12)What is the difference between RxJava and LiveData?
+RxJava is not a lifecycle aware component.
+So, data stream does not go off, when activity, fragment or service becomes inactive.
+As a result of that, memory leaks or crashes can happen.
+Therefore, we have to write codes to dispose them manually.
+But, on the other hand, Android LiveData aware of lifecycle status changes.
+And, they clean up themselves(stop emitting data) when their associated lifecycle is destroyed.
+
+13)What is MutableLiveData, what is the difference between LiveData and MutableLiveData ?
+MutableLiveData class is a subclass of LiveData class. In other words, MutableLiveData child class has created by extending the parent LiveData class.
+A MutableLiveData instance can do everything a LiveData instnce can do and more.
+Data in a LiveData object are only readable. We cannot update those values.
+But, in the other hand, a Mutable LiveData object allows us to change(update) its values.
+So, When we are creating our own live data(mostly in ViewModels), we define them as MutableLiveData.
+But, when we are getting live data from other libraries such as Room and Retrofit we get them as LiveData.
+We can easily transfer values between those two formats.
+
 
 
