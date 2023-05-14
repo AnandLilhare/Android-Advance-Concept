@@ -1,6 +1,11 @@
+
+
+
+
 Interview Questions
 
 Data Binding
+-----------
 1) Can I use findViewById() for all my Android Projects?
     Yes you can, you can build any Android Project using findViewById(). That's what we had been doing during the early days of  Android.
 
@@ -76,6 +81,7 @@ No, if the ViewModel created extending AndroidViewModel, does not have parameter
 Also when we click on the back button, ViewModel of current activity will be cleared (onCleared() will be invoked)
 
 Live Data
+-------------
 10) Where do we create/generate LiveData?
 We usually define LiveData, inside ViewModel classes.
 Also, supporting libraries like Room and Retrofit allows us to get data directly in LiveData format.
@@ -101,6 +107,109 @@ But, in the other hand, a Mutable LiveData object allows us to change(update) it
 So, When we are creating our own live data(mostly in ViewModels), we define them as MutableLiveData.
 But, when we are getting live data from other libraries such as Room and Retrofit we get them as LiveData.
 We can easily transfer values between those two formats.
+
+------------
+RecyclerView
+
+1. How does a RecyclerView differ from a ListView?
+A RecyclerView is a more advanced and flexible version of a ListView. While a ListView simply displays a list of items, a RecyclerView can also be used to implement more complex lists, such as grids and staggered lists. Additionally, a RecyclerView is more efficient than a ListView, as it uses a ViewHolder to recycle views instead of creating new views for each item in the list.
+
+2. Can you give me some examples of where RecyclerViews can be used in real-world apps?
+RecyclerViews are commonly used in apps that need to display lists of data. This could be a list of items for sale in an ecommerce app, a list of articles in a news app, or a list of friends in a social media app. RecyclerViews are also often used in conjunction with other ViewGroup objects, like SwipeRefreshLayout, to provide a complete user interface.
+
+3. What are the three main components that make up a RecyclerView?
+The three main components that make up a RecyclerView are the LayoutManager, the RecyclerView.Adapter, and the RecyclerView.ViewHolder. The LayoutManager is responsible for managing the layout of the items in the RecyclerView, the RecyclerView.Adapter is responsible for managing the data that is displayed in the RecyclerView, and the RecyclerView.ViewHolder is responsible for managing the individual views that are displayed in the RecyclerView
+
+4. In what ways do RecyclerViews improve upon ListViews?
+RecyclerViews offer a number of advantages over ListViews, including the following:
+
+-They are more flexible and customizable, allowing for a greater degree of control over how the data is displayed.
+-They are more efficient, making better use of resources and reducing lag.
+-They allow for more complex and sophisticated animations and interactions.
+
+5.Can you explain how to implement a RecyclerView in Android Studio?
+RecyclerView is a new widget in Android Studio that allows you to easily create scrollable lists of data. To implement a RecyclerView, you will need to first create a layout file that defines the look of each item in the list. Next, you will need to create a RecyclerView.Adapter that will bind the data to the RecyclerView. Finally, you will need to set the adapter on the RecyclerView.
+
+6. What are the various types of adapters available with RecyclerViews?
+There are three types of adapters available with RecyclerViews:
+
+1. ListAdapter: This is used for displaying a list of items.
+2. GridAdapter: This is used for displaying items in a grid layout.
+3. StaggeredGridAdapter: This is used for displaying items in a staggered grid layout.
+
+7. What’s the difference between ViewGroups and Views?
+A ViewGroup is a container that can hold other Views (and ViewGroups), whereas a View is an individual widget, like a button or a text field. ViewGroups are necessary for creating complex layouts with multiple widgets, but Views can be used on their own if you just need a single widget.
+
+8. How would you handle a situation where an invalid position was given by getAdapterPosition() or getLayoutPosition()?
+If an invalid position is given by getAdapterPosition() or getLayoutPosition(), then the RecyclerView will not be able to display the data correctly. In this case, you would need to either catch the exception that is thrown or use a try/catch block to handle the error.
+
+9.What is an ItemDecoration? How can we add one to our RecyclerView?
+An ItemDecoration is a class that allows us to add special formatting to our RecyclerView items. We can use ItemDecorations to add dividers between our items, or to add special headers or footers to our RecyclerView. To add an ItemDecoration to our RecyclerView, we simply need to create a new instance of the ItemDecoration class and add it to our RecyclerView using the addItemDecoration() method
+
+10. When should you consider using GridLayoutManager instead of LinearLayoutManager?
+GridLayoutManager is best used when you have a large number of items that need to be displayed in a grid. This is typically the case when you are displaying images, as opposed to text. LinearLayoutManager is best used when you have a small number of items that need to be displayed in a linear fashion, such as a list of text.
+
+11. What is a LayoutManager? Why is it useful when working with RecyclerViews?
+A LayoutManager is a class used by RecyclerViews to manage the positioning of items within the view. This class is responsible for measuring and positioning items within the RecyclerView, as well as determining when items need to be recycled and reused. LayoutManagers are useful when working with RecyclerViews because they help to keep the view organized and efficient, while also allowing for a great deal of flexibility in terms of how items are displayed.
+
+12. What is the use of notifyItemInserted(), notifyItemRemoved(), etc.?
+These are some of the methods available in the RecyclerView.NotifyItemInserted() is used to notify the RecyclerView that an item has been inserted at a given position. NotifyItemRemoved() is used to notify the RecyclerView that an item has been removed from a given position. There are many other methods available as well, each with a specific purpose. You can use these methods to keep your RecyclerView up-to-date with the latest data.
+
+13 . What is the importance of setHasStableIds()? Should this always be enabled for all RecyclerViews?
+The setHasStableIds() method is used to tell the RecyclerView that the items in the adapter have stable IDs. This is important for when the RecyclerView is animating changes to the data set, because it can then use those IDs to help determine which items have changed and need to be updated on screen. However, this method should not always be enabled, as it can have a negative impact on performance if the IDs are not actually stable
+
+14.Is it possible to have multiple viewholders within a single RecyclerView?
+Yes, it is possible to have multiple viewholders within a single RecyclerView. This can be useful if you want to display different types of data in the same list. For example, you could have a viewholder for text data and another for images
+
+-------------------
+
+ROOM Data base
+1. Why is Room better then directly using SQLLite?
+Ans:Because Room provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
+
+2. Is room database an ORM?
+Ans: The room is an ORM ( Object Relational Mapper ) for SQLite database in Android. It is part of the Architecture Components.
+
+3.Define room in android?
+Ans: Room is an ORM (object relational mapper) for SQLite database in Android. It is part of the Architecture Components released by Google. ...
+Room allows you to create and manipulate database in Android more quickly. See it as an abstraction layer on top of inbuilt SQLite database.
+
+4.How you migrate database on room?
+Ans: to migrating data base 1. need to add shemas path in gradle
+kapt{
+            arguments{
+                arg("room.schemaLocation","$projectDir/schemas")
+            }
+        }
+
+ 2. then need to add 
+ @Database(
+    entities = [Subscriber::class],
+    version = 3,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2)
+        ]
+      ) in data base class
+ 
+3. How to rename database coloumn in room?
+@Database(
+    entities = [Subscriber::class],
+    version = 3,
+    autoMigrations = [
+        AutoMigration(from = 1, to = 2 , spec = SubscriberDatabase.Migration1To2::class),
+        AutoMigration(from = 2, to = 3 , spec = SubscriberDatabase.Migration2To3::class)
+    ]
+) in database class and need to write inner class 
+@RenameColumn(tableName = "subscriber_data_table", fromColumnName = "subscriber_name", toColumnName = "subs_id")
+    class Migration1To2 : AutoMigrationSpec
+    @RenameColumn(tableName = "subscriber_data_table", fromColumnName = "subscriber_id", toColumnName = "subscriber_name")
+    class Migration2To3 : AutoMigrationSpec
+
+----------------
+
+
+
+
 
 
 

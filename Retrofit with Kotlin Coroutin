@@ -1,0 +1,18 @@
+Retrofit with Kotlin Coroutin
+
+
+To implement retrofit 
+1. add the following dependency in gradle
+implementation 'com.squareup.retrofit2:retrofit:(insert latest version)'
+
+2. to convert json responce to kotlin data class
+Gson: com.squareup.retrofit2:converter-gson
+implementation 'com.squareup.retrofit2:converter-gson:(insert latest version)'
+
+3. add dependency of coroutine
+ implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+4 To get a log from retrofit
+implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+5 To convert json response to kotlin classes, install Json to Kotlin class plugin in Android Studio.
