@@ -1,0 +1,27 @@
+Chapter -20 :MVVM Clean Architecture Complete Projec
+
+First identity use cases
+
+1. Get new Headling
+2. Save News
+3. Get News
+4. Delete Save News
+5. Get search news
+
+
+package
+1. Domain
+2. Data
+3. Presentation
+
+
+View
+ |
+ViewModel
+ |
+UseCases
+ |
+Repository
+ |\
+Local      Remote Data Source
+Data Source  

@@ -1,0 +1,30 @@
+Dependancy Injection
+
+The process of constructing required dependancies(object/entities/instance) out side of depended object and providing them to depended object whenever ther needed.
+
+Types of dependancy Injection
+
+1. Constructor Injection
+2. Method Injection
+3. Field Injection
+
+following the dependancy need to add in the android project.
+implementation 'com.google.dagger:dagger-android:2.x'
+implementation 'com.google.dagger:dagger-android-support:2.x' // if you use the support libraries
+annotationProcessor 'com.google.dagger:dagger-android-processor:2.x'
+
+Constructor Injection by Dagger
+
+1. First visible constructor to all classes and @Inject them.
+2. Create interface Componets and create abstract function that we need to create dependacny.
+3. Now call componet call from activity after rebuild the project
+
+Module 
+The class which you can not able to update constructor with Inject, in that scanario you need to require to implements Module concept.
+
+1. Module and Provides annotation will required to implement module class.
+2. Now link the module to Componet interface.
+3. abstract function must use Bind annotation instade of Provide annotation
+
+Field Injection
+

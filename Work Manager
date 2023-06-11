@@ -1,0 +1,51 @@
+Work Manager
+
+WorkManager is the recommended solution for persistent work. Work is persistent when it remains scheduled through app restarts and system reboots. Because most background processing is best accomplished through persistent work, WorkManager is the primary recommended API for background processing.
+
+Types of persistent work
+WorkManager handles three types of persistent work:
+
+1. Immediate: Tasks that must begin immediately and complete soon. May be expedited.
+2. Long Running: Tasks which might run for longer, potentially longer than 10 minutes.
+3. Deferrable: Scheduled tasks that start at a later time and can run periodicall
+
+Following are the four steps to implement Workmanager class
+
+1. Create a Worker class
+2. Create a Worker request
+3. Enqueue the request
+4. Get the Status updates
+
+Following are the dependancy need to implement.
+ def work_version = "2.8.1"
+
+    // (Java only)
+    implementation "androidx.work:work-runtime:$work_version"
+
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
+    // optional - RxJava2 support
+    implementation "androidx.work:work-rxjava2:$work_version"
+
+    // optional - GCMNetworkManager support
+    implementation "androidx.work:work-gcm:$work_version"
+
+    // optional - Test helpers
+    androidTestImplementation "androidx.work:work-testing:$work_version"
+
+    // optional - Multiprocess support
+    implementation "androidx.work:work-multiprocess:$work_version"
+}
+
+Workmanager have four state
+1.Blocked
+2.Enqueued
+3.Running
+4.Succeeed
+
+We can add constraint to work manager to run in specific conditon
+val constraints = Constraints.Builder()
+            .setRequiresCharging(true)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
