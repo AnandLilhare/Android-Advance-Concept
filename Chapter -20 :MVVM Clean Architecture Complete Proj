@@ -25,3 +25,62 @@ Repository
  |\
 Local      Remote Data Source
 Data Source  
+
+
+1. Need to add gson dependancy 
+implementation 'com.google.code.gson:gson:2.10.1'
+
+2. Stroing secret key in android
+https://guides.codepath.com/android/storing-secret-keys-in-android
+https://developer.android.com/training/articles/keystore
+
+
+Alternative code for ActiveNetWorkInfo
+--------------------------------------
+With API leve 29, ActiveNetWorkInfo is Deprecated.
+
+But, that is not a problem. Use this inNetWorkAvailable() function in NewsViewModel.kt.
+
+ 
+
+@Suppress("DEPRECATION")
+fun isInternetAvailable(context: Context): Boolean {
+    var result = false
+    val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        cm?.run {
+            cm.getNetworkCapabilities(cm.activeNetwork)?.run {
+                result = when {
+                    hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            }
+        }
+    } else {
+        cm?.run {
+            cm.activeNetworkInfo?.run {
+                if (type == ConnectivityManager.TYPE_WIFI) {
+                    result = true
+                } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                    result = true
+                }
+            }
+        }
+    }
+    return result
+}
+
+How to test web api with mock server
+https://github.com/square/okhttp/tree/master/mockwebserver
+
+Truth library
+https://truth.dev/
+
+To implement swipe event for deleteting the row, then need to implement 
+val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+
+
+
+

@@ -1,0 +1,73 @@
+Jetpack Compose
+
+https://appdevnotes.com/complete-jetpack-compose-tutorial-for-beginners/
+
+https://developer.android.com/jetpack/androidx/releases/compose-kotlin
+
+https://developer.android.com/jetpack/compose/documentation
+
+In Jetpack Compose, there are 3 simple ways to arrange user interface elements
+
+Column
+row 
+box
+
+Column:
+1. VerticalArragment: there is six type of vertical arragement
+2. horizontalAlignment: there is three horixontal Alignment.
+
+Row:
+1. HorizontalArrangement: there is six type of vertical arragement
+2. VerticalAlignment: there is three horixontal Alignment.
+
+
+Context in compose - To get context for compose like within the button
+val context = LocalContext.current
+
+SnackBar in JetPackCompose
+
+There is two think require to implement snackbar
+1. A Scaffold State
+
+2. A Coroutine Scope
+
+RecycleView in JetPackCompose
+-----------------------------
+
+1. By using Column layout
+2. to scroll the list , get an instance of ScrollState.
+3. Add verticalscroll modifier.
+
+Lazy Column is use for optimised way to implement List
+ 
+
+Recompostion:
+1. In order to recompostion happened change of the stat must be obserable compose.
+2. We can do by Mutable state, Live date and RxJava or Flow
+   val count = mutableStateOf(0)
+   count.value = count.value+1
+
+State Hoisting
+https://developer.android.com/jetpack/compose/state-hoisting
+
+rememberSaveable: It is use for persist the date to clear whent rotating and configuration change of devices
+ex:var count by rememberSaveable{mutableStateOf(0)}
+
+State Flow:
+StateFlow is a state-holder observable flow that emits the current and new state updates to its collectors. The current state value can also be read through its value property. To update state and send it to the flow, assign a new value to the value property of the MutableStateFlow class
+
+LiveData vs StateFlow
+1.LiveData does not take an inital value.So we need to check for nullabilty
+2.StateFlow need to intial value. So no need to check nullablity.
+3.Livedata automatically unregister the consumers, when the view goes to stopped state.
+4.StateFlow does not do that default, we need to use it with lifecycleScope for that
+5.LiveData is part of Android Framework. So we can only use the code for Android Developement.
+6.StateFlow is part of Kotlin language. SO we can use it for Kotlin Multiplatlform projects.
+
+ShareFlow:
+The shareIn function returns a SharedFlow, a hot flow that emits values to all consumers that collect from it. A SharedFlow is a highly-configurable generalization of StateFlow.
+
+
+
+
+
