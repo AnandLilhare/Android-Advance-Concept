@@ -1,0 +1,144 @@
+RxJava/RxAndroid
+
+- Reactive programming is combination of observer pattern, Iterator pattern, Functional programming.
+
+Q. Why and When should we use RxJava?  What are the benefits?
+1. Interfaces and methods provided by Reactive Extensions (Rx) provide a way to developers solve problems rapidly. We can save a lot of time we usually spend for writing complex algorithms and bug fixing.
+
+2. As it provides a common structure we can write easy to understand and easy to maintain code. RxJava support us to write clean and simpler code.
+
+3. RxJava allow a different approach of programming than imperative(way we usually code in Android) approach. It is reactive based, where codes are not activate until it knows it’s end mean
+
+4. RxJava makes multi-threading super easy. Using imperative approach, moving a piece of code to background thread is hard work. However in RxJava, we could easily define what thread each part of the chain would be in.
+
+5. It provide extensibility to our code. RxJava code can be extended with custom operators.
+
+6. RxJava is composable, Rx operators can be combined to produce more complicated operations.
+
+7. Rx operators can transform one type of data to another, reducing, mapping or expanding streams as needed.
+
+8. UI events like mouse move , button click, domain events like property changed, collection updated can be easily use to generate and handle data streams with RxJava.
+
+9. Error handling becomes much easier with RxJava. You don’t need to worry about adding try catch blocks everywhere.
+
+10 .In mobile applications, we cannot control the app lifecycle. Sometimes we need to terminate current processes rapidly to response to a app lifecycle change. RxJava provide simple yet profound mechanism to terminate background processes rapidly
+
+11.Particularly, callBack occurs when performing several asynchronous operations in a series where the next action depends on the results of the previous operation, making the code untidy and hard to manage. RxJava renders a better way to terminate the urgency to build layers of callbacks.
+
+
+There is two main constraint in RxJava
+
+Observables: 
+1. Instances of Observable class    .
+2. Observables observe data streams and emit them to subscribed Observers.   
+
+Observers:
+1.Instances of observer interface .
+2.Observers consume data emitted by the Observables.  
+
+
+Schedulers 
+-----------
+With the help of Schedulers we handle multithreading in RxJava. A scheduler can be recognized as a thread pool managing one or more threads. Whenever a Scheduler needs to execute a task, it will take a thread from its pool and run the task in that thread.
+
+Different types of Schedulers available in RxJava 
+1. Schedulers.io() :This can have a limitless thread pool. Used for non CPU intensive tasks. Such as database interactions, performing network  communications and interactions with the file system.
+2. AndroidSchedulers.mainThread(): This is the main thread or the UI thread. This is where user interactions happen
+3.Schedulers.newThread(): This scheduler creates a new thread for each unit of work scheduled.
+4.Schedulers.single():This scheduler has a single thread executing tasks one after another following the given order.
+5.Schedulers.trampoline():This scheduler executes tasks following first in, first out basics.We use this when implementing recurring tasks.
+6.Schedulers.from(Executor executor): This creates and returns a custom scheduler backed by the specified executor.
+
+Disposables 
+-----------
+In mobile applications we cannot control the app life-cycle. Let’s say in an app you created you have written code to run a network call to a REST API and update the view accordingly. If a user initiate a view but decide to go back before the completion of the network call, What will happen? The activity or fragment will be destroyed. But the observer subscription will be there. When observer trying to update the User Interface, in this scenario as the view already destroyed,  it can cause a memory leak. And your app will freeze or crash as a result.
+
+Disposable Observers
+-------------------
+DisposableObserver class implements both Observer and Disposable interfaces. DisposableObserver is much efficient than Observer if you have more than one observers in the activity or fragment.
+
+DisposableObserver implementation has only three overridden methods. DisposableObserver  does not need onSubscribe method ,as DisposableObserver can dispose by itself.
+
+Composite Disposable
+------------------
+In one class you can have more than one observers . So you will have so many observers to dispose.We can dispose them one by one. This is not the best way to do this , specially if you have many observers.
+
+Q) When we have more than one observers we use CompositeDisposable .CompositeDisposable Can maintain a list of subscriptions in a pool and can dispose them all at once.We can also call to clear method to get the same work done.
+
+1.What is the difference between clear() and dispose() ?
+When you are using CompositeDisposable, If you call to dispose() method, you will no longer be able to add disposables to that composite disposable.
+
+2. But if you call to clear() method you can still add disposable to the composite disposable . Clear() method just clears the disposables that are currently held within the instance
+
+
+
+RxJava Operator:
+
+Creating Observables: 
+1. Just :-The just operator convert an item into an Observable that emits the items.
+         - Just operator emits only onces 
+2. FromArray : - onvert various other objects and data types into Observables
+               - It is emits one value at a time from array.
+3. Range : - create an Observable that emits a particular range of sequential integers
+           
+4. Create : - create an Observable from scratch by means of a function
+
+Transforming Observables
+
+1. Map : - transform the items emitted by an Observable by applying a function to each item
+         - The Map operator applies a function of your choosing to each item emitted by the source Observable, and returns an Observable that emits the results of these function applications.
+2. FlatMap: - transform the items emitted by an Observable into Observables, then flatten the emissions from those into a single Observable
+
+3. Concat: - emit the emissions from two or more Observables without interleaving them
+           - The Concat operator concatenates the output of multiple Observables so that they act like a single Observable, with all of the items emitted by the first Observable being emitted before any of the items emitted by the second Observable (and so forth, if there are more than two).
+           - if you want to maintaine order of flatmp then use this operator
+4. Buffer: - periodically gather items emitted by an Observable into bundles and emit these bundles rather than emitting the items one at a time
+
+5. Filter: emit only those items from an Observable that pass a predicate test
+
+6. Distinct : suppress duplicate items emitted by an Observable
+
+7: Skip: suppress the first n items emitted by an Observable
+
+8: SkipLast: suppress the final n items emitted by an Observable
+
+
+Rx Subject
+--------
+A Subject is a sort of bridge or proxy that is available in some implementations of ReactiveX that acts both as an observer and as an Observable. Because it is an observer, it can subscribe to one or more Observables, and because it is an Observable,
+
+Varieties of Subject
+1.AsyncSubject : Only emits the last value of the Observable .
+2.BehaviorSubject : Emits the most recently emitted item and all the subsequent items of the  Observable
+3.PublishSubject : Emits all the subsequent items of the source Observable at the time of subscription 
+4.ReplaySubject : emits all the items of the source Observable, regardless of when the subscriber subscribes .
+
+
+
+Backpressure strategies  
+----------------------
+
+1. BackpressureStrategy.DROP
+We use this to discard the events that cannot be consumed by the Observer.
+
+2. BackpressureStrategy.BUFFER
+if we use this, the source will buffer all the events until the subscriber can consume them. I recommend this strategy for most of the use cases, because there will be no data loss with this strategy.
+
+3.BackpressureStrategy.LATEST
+BackpressureStrategy.LATEST, force  to the source to keep only the latest items, to do that source may need to  overwrite some previous values .
+
+4.BackpressureStrategy.MISSING
+We may temporary  pass this value, if we don’t want any backpressure stratergy.
+
+5.BackpressureStrategy.ERROR
+If we don’t expect backpressure at all, we can pass BackpressureStrategy.ERROR
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+Dagger2
+
+Dagger2 has three concept
+
+1. @Inject : It tell dagger to which object to inject
+2. @Module : how to create object which we want to inject object
+3. @Component: Which link togather 
+
