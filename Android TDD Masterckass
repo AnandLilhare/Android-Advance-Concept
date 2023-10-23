@@ -1,0 +1,14 @@
+Android TDD Masterckass
+
+
+3 Rules of TDD
+
+1. You may not write production code until you have written a failing unit test
+2. You may not write more of a unit test than is sufficient to fail, and not compiling is failing.
+3. You may not write more production code than is sufficient to pass the currently failing test.
+
+Type of Automated Test
+
+1. Unit: Test a very small block of code, usually a method.
+2. Integration: Software modules are combined and tested as a group.
+3. End to End : Testing an application workflow form begining to end.

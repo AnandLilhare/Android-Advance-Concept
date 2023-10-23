@@ -134,6 +134,16 @@ We may temporary  pass this value, if we don’t want any backpressure stratergy
 If we don’t expect backpressure at all, we can pass BackpressureStrategy.ERROR
 
 
+Why should we use RxJava with Room?
+
+- Thread handling
+- Easy to modify data streams
+- Cleaner, readable & maintainable code
+- Get live updated from the database
+
+
+
+
 
 
 
