@@ -1,0 +1,40 @@
+Hilt -  Dependancy Injection
+
+@HiltAndroidApp:- triggers Hilt's code generation, including a base class for your application that can use dependency injection. The application container is the parent container for the app, which means that other containers can access the dependencies that it provides.
+
+@AndroidEntryPoint:
+- Annotating Android classes with @AndroidEntryPoint creates a dependencies container that follows the Android class lifecycle.
+- Hilt currently supports the following Android types: Application (by using @HiltAndroidApp), Activity, Fragment, View, Service and BroadcastReceiver.
+
+-  only supports activities that extend FragmentActivity (like AppCompatActivity) and fragments that extend the Jetpack library Fragment, not the (now deprecated) Fragment from the Android platform.
+
+-----
+Scoping instances to containers:
+- We can use annotations to scope instances to containers. As Hilt can produce different containers that have different lifecycles, there are different annotations that scope to those containers.
+
+----
+Hilt modules
+- Modules are used to add bindings to Hilt, or in other words, to tell Hilt how to provide instances of different types.
+- A Hilt module is a class annotated with @Module and @InstallIn. @Module tells Hilt that this is a module and @InstallIn tells Hilt the containers where the bindings are available by specifying a Hilt component. You can think of a Hilt component as a container. 
+
+-For each Android class that can be injected by Hilt, there's an associated Hilt component. For example, the Application container is associated with SingletonComponent, and the Fragment container is associated with FragmentComponent.
+
+Providing instances with @Provides
+We can annotate a function with @Provides in Hilt modules to tell Hilt how to provide types that cannot be constructor injected.
+
+The function body of a function that is annotated with @Provides will be executed every time Hilt needs to provide an instance of that type. The return type of the @Provides-annotated function tells Hilt the binding type, the type that the function provides instances of.. The function parameters are the dependencies of that type.
+
+--------------
+Qualifiers
+- To tell Hilt how to provide different implementations (multiple bindings) of the same type, you can use qualifiers.
+- We need to define a qualifier per implementation since each qualifier will be used to identify a binding. When injecting the type in an Android class or having that type as a dependency of other classes, the qualifier annotation needs to be used to avoid ambiguity.
+
+- Also, these qualifiers must be used at the injection point with the implementation we want to be injected.
+
+--------------
+@EntryPoint annotation
+- As we saw before, Hilt comes with support for the most common Android components. However, you might need to perform field injection in classes that either are not supported directly by Hilt or cannot use Hilt.
+
+- In those cases, you can use @EntryPoint. An entry point is the boundary place where you can get Hilt-provided objects from code that cannot use Hilt to inject its dependencies. It is the point where code first enters into containers managed by Hilt.
+
+@EntryPoint in action
