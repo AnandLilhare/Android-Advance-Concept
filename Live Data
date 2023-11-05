@@ -1,14 +1,10 @@
 Live Data
-
 1. A lifecycle aware observable data holder classes.
 2. In android having three app componets which related to lifecycle.
    1.Activity
    2.Fragement
-  3.Services
+   3.Services
 3. LiveData only updates observers in activity lifecycle state
-
-
-
 
 
 Android LiveData is a lifecycle-aware, observable data holder class.
