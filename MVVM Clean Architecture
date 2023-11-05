@@ -1,6 +1,6 @@
 MVVM Clean Architecture
 
-If you are using Clean architecture, then we need to divide layers into three part
+If you are using Clean architecture, then we need to divide layers into three-part
 
 1. Presentation(application)
     a. View
@@ -12,16 +12,13 @@ If you are using Clean architecture, then we need to divide layers into three pa
    a. Local Data Structure
    b. Remote Data Source
 
-
 UseCase:-----
-In this section, I have created Use Case classes for all the Use Cases recongnized to demonstrate you how they work. But that doesn't mean you must always have use case classes in your projects.(it is optional not compulsory)
-
-In Industrial level(professional) projects usually we have more than one view models.
-
+1. In this section, I have created Use Case classes for all the Use Cases recongnized to demonstrate you how they work. 
+But that doesn't mean you must always have use case classes in your projects.(it is optional not compulsory)
+2. In Industrial-level (professional) projects usually we have more than one view models.
 If there is some business logic(Use Case), common to two or more view models(in larger projects we always have them) we usually create a Use Case class to code that business logic .
-
 So, instead of repeating the same code, view models can invoke the same function in the Use Case class.
-
-Also, if a view model is going to have too many lines of code, we can create use case classes for different use cases and move business logics to their functions. In that way we can improve the readability and testability of the code.
+Also, if a view model is going to have too many lines of code, we can create use case classes for different use cases and move business logics to their functions. 
+In that way we can improve the readability and testability of the code.
 
 
