@@ -1,10 +1,14 @@
 View Model
-It exposes state to the UI and encapsulates related business logic. Its principal advantage is that it caches state and persists it through configuration changes.
+1. It exposes the state to the UI and encapsulates related business logic. 
+2. Its principal advantage is that it caches state and persists it through configuration changes.
 
 Sope:
-When you instantiate a ViewModel, you pass it an object that implements the ViewModelStoreOwner interface. This may be a Navigation destination, Navigation graph, activity, fragment, or any other type that implements the interface. Your ViewModel is then scoped to the Lifecycle of the ViewModelStoreOwner. It remains in memory until its ViewModelStoreOwner goes away permanently.
+When you instantiate a ViewModel, you pass it an object that implements the ViewModelStoreOwner interface. 
+This may be a Navigation destination, Navigation graph, activity, fragment, or any other type that implements the interface. 
+Your ViewModel is then scoped to the Lifecycle of the ViewModelStoreOwner. It remains in memory until its ViewModelStoreOwner goes away permanently.
 
-A range of classes are either direct or indirect subclasses of the ViewModelStoreOwner interface. The direct subclasses are ComponentActivity, Fragment, and NavBackStackEntry. For a full list of indirect subclasses, see the ViewModelStoreOwner reference.
+A range of classes are either direct or indirect subclasses of the ViewModelStoreOwner interface. The direct subclasses are ComponentActivity, Fragment, and NavBackStackEntry. 
+For a full list of indirect subclasses, see the ViewModelStoreOwner reference.
 
 
 To integrate View Model
@@ -24,13 +28,9 @@ To integrate View Model
 5. Invoke viewmodel method 
    ex: viewModel.getCurrentCount().toString()
 
-
 View model factory class:
-
 1. When you wanted to pass parameter to view model class you will need to create ViewModelFactory class
 Create a ViewModelFactory.
-
-
 class MainActivityViewModelFactory(private val startingTotal : Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)){
@@ -39,7 +39,6 @@ class MainActivityViewModelFactory(private val startingTotal : Int) : ViewModelP
         throw IllegalArgumentException("Unknown View Model Class")
     }
 }
-
 
 Get an instance(object) of a ViewModel when using a ViewModelFactory.
 class MainActivity : AppCompatActivity() {
