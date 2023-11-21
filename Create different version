@@ -1,0 +1,53 @@
+Create different version
+
+1. Build variants are the result of different combinations of product flavors and build types.
+2. Specifically, the build variants represent every, combination of product flavor and build type, and are named <prdocut-flavor><build-type>
+
+ ex. demoDebug
+     demoRelease
+     fullDebug
+     fullReleas
+
+3.  To add the prodcut flavors, open app-level build-gradle file and write below code in android {}
+
+       flavorDimensions "app_type"
+        productFlavors {
+            demo {
+               dimension "app_type" 
+            }
+            full {
+                dimension "app_type"
+            }
+            
+        }
+4. Now that you have two product flavors and two build types, let's see what build variants they create. To view your new build variants in Android Studio:
+    1. In the toolbar, click Sync Project with Gradle Files 4e7fbf18152549d8.png. Whenever you make changes to build configuration files, Studio prompts you to sync your files so that it can save the new build configuration and check for build errors.
+    2.Click Build > Select Build Variant (or View > Tool Windows > Build Variants) to display the Build Variants window.
+
+5. Create different features for different variants
+   
+    1. Add a premium feature using source sets.
+       - A source set is a directory that contains content for specific build types, product flavors, and build variants. 
+
+       - The default main source set (app > src > main) contains content to share among all build variants. This default content can be overridden by content in other source sets.
+
+       - Create a source set, or directory, for the product flavor you want to change
+
+       - Paste the resource file you want to change into this new source set and then update it. When the Android Gradle plugin (AGP) builds a build variant that depends on the new source set, it overrides the resource code in main with the resource code in the new source set.
+
+       To override a behavior in a Java or Kotlin class (something in main > java), follow these general steps:
+
+        1. Create source sets, or directories, for the product flavor you want to change and all the other product flavors in the same flavor dimension.
+
+        2. Paste the file you want to change into all the product flavor source sets, and then modify the copy (or copies) you want to change.
+
+        3. Delete the original file from the main source set.
+
+    2. Determine where to create new source sets
+    The Android Gradle plugin (AGP) shows you how to organize your files for each of your build types, product flavors, and build variants. To add a premium feature to the full product flavor that includes a change to the MainActivity.kt file, you create source sets for both the full and demo flavors. To find out where to create these source sets, follow these steps in Android Studio:
+
+       1. Click Gradle in the IDE window.
+       2. Navigate to MyApplication > Tasks > android and double-click sourceSets. If you don't see the Tasks folder, let Gradle build the task list during sync by clicking File > Settings > Experimental and unchecking Do not build Gradle task list during Gradle sync (Android Studio > Preferences > Experimental on macOS). After Gradle executes the task, the Run window should then display the output.
+
+       3. If the display is not in text mode as shown here, click Toggle view 82487fd4e011f105.png in the Run window.
+       

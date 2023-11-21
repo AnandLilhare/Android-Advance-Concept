@@ -1,4 +1,6 @@
-Jetpack Compose
+Jetpack Compose:
+It simplifes and significantly accelerates UI development on Android using the declarative approach.
+
 
 https://appdevnotes.com/complete-jetpack-compose-tutorial-for-beginners/
 
@@ -10,7 +12,7 @@ In Jetpack Compose, there are 3 simple ways to arrange user interface elements
 
 Column
 row 
-box
+box: Box()can contain one or more childern, it belongs to the androidx.compose.foundation.layout package. They are positioned inside the box accroding to the content Alignment parameter.
 
 Column:
 1. VerticalArragment: there is six type of vertical arragement
@@ -19,6 +21,58 @@ Column:
 Row:
 1. HorizontalArrangement: there is six type of vertical arragement
 2. VerticalAlignment: there is three horixontal Alignment.
+
+General Note:
+
+- modifier: Modifiers are a key technique in jetpack compose to influence both the lokks and behaviour of composable function.
+
+- Recompostion: Certain type trigger a so-called recompostion.
+- To use the Compose preview, your composable function must containe an additional annotation, @Preview.
+- To render composables, your acitivy must extend either ComponentActivity or another class that has ComponentActivity as its direct or indirect ancestor.
+-This is an inportant differernce; while Composes app invoke setContent(), View-based app call setContentView 
+
+Componet Base View(Imperative)
+JetPack Compose marks a fundamentals shift in Android UI development. While the traditional view-based approach(Imperative) is centered around components and classes, new framework follows as declarative approach.
+  1. The root of all classed in java is java. lang.Object
+  2. android.view.View is the root of all Android UI elements
+  3. All components that position and size their children extend android.view.ViewGroup
+
+-----------------
+Composing UIs
+
+
+- Row() : Content horizontally
+- Column(): Content Vertically 
+- Box(): It is simillar to FramLayout. It organizes its content in the order it appears in code. The positin inside the box is controlled by contentAlignment
+- modifier = Modifier. : The root of such a chain is the Modifier companion object.
+-background() : this modifier allows you to set a background color for any composable function
+
+Exploring the Key Principles of Compose
+
+A composable function is a Kotlin function that has been annotated with @Composable.
+The name of a composable function uses the PascalCase notation. it starts with uppercase letter, wherea the remaining character are lowecase.
+The name should be noun.
+Composable function emit UI elements.
+Layout(): It is belong to the androidx.compose.ui.layout package. It is the core composable function for the layout.
+
+When we speak of composable functions emitting UI elements, we mean that nodes are added to data structures that are internal part of Jeptack compose. This will eventually lead to UI elements being visible.
+Composing and recomposing the UI
+Unlike imperative UI frameworks, Jetpack compose does not depend on the deveploer proactively modifying a component tree when change in the app data repquire change to be made to the UI. Instead, Jeptack compose detects such changes on its own and update only the affected part.
+
+Sharing state among conposable functions
+If that data is modified inside the composable, you should use MutableState. 
+Moving state to a composable's caller by receiving a state is called state hoisting
+BoxWithConstraints(): A composable that defines its own content according to the available space, based on the incoming constraints or the current LayoutDirection
+Modifier.width(min(400.dp, maxWidth)) : The width of the column is either 400 density-independent pixels or maxWidth, depending on which value is smaller
+remember: 
+
+Complementary() is an extension function of color.
+
+
+
+
+
+
 
 
 Context in compose - To get context for compose like within the button

@@ -105,6 +105,28 @@ var users = liveData(Dispatchers.IO) {
     }
 you can use coroutins as Live date 
 
+--------------------------------------------------------------------------------------------------------------
+CoroutineScope: A CoroutineScope is a context that enforces cancellation and other rules to its children and their children recursively.
+Functions used to create new coroutines such as launch() and async() extend CoroutineScope.
+
+Dispatcher: A Dispatcher manages which backing thread the coroutine will use for its execution, removing the responsibility of when and where to use a new thread from the developer.
+Determines the thread the coroutine will use. The Main dispatcher will always run coroutines on the main thread, while dispatchers like Default, IO, or Unconfined will use other threads.
+
+Global Scope:he GlobalScope allows any coroutines in it to run as long as the app is running. For the reasons we talked about concerning the main thread, this is not recommended outside example code. When you use coroutines in your apps, we will use other scopes.
+
+launch(): The launch() function creates a coroutine from the enclosed code wrapped in a cancelable Job object. launch() is used when a return value is not needed outside the confines of the coroutine.
+
+runBlocking:The next examples will use runBlocking(), which as the name implies, starts a new coroutine and blocks the current thread until completion. It is mainly used to bridge between blocking and non-blocking code in main functions and tests. You will not be using it often in typical Android code.
+
+When to mark functions as suspend
+- Whenever a function calls another suspend function, then it should also be a suspend function.
+
+
+
+
+
+
+
 
 
 
