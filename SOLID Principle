@@ -1,0 +1,39 @@
+SOLID Principle
+
+SOLID is a mnemonic acronym that helps define the five basic object-oriented design principles:
+
+- Single Responsibility Principle
+- Open-Closed Principle
+- Liskov Substitution Principle
+- Interface Segregation Principle
+- Dependency Inversion Principle
+
+The Single Responsibility Principle (SRP)
+ - A class should have one, and only one, reason to change.
+Example: for more details, let’s assume we need an adapter of Recyclerview, as you probably already know an adapter takes the data from the data set and adapts it to a view.
+onBindViewHolder method is not only mapping from an Movie object to the view, but is also performing data formatting as well. This violates the Single Responsibility Principle. The adapter should only be responsible for adapting an order object to its view representation. The onBindViewHolder is performing extra duties that it should not be. An updated onBindViewHolder method could look like this:
+
+---------------------
+The Open-Closed Principle (OCP)
+- Software entities (classes, modules, functions, etc…) should be open for extension, but closed for modification.
+
+- Once you have written a Class/Component following the First Single Responsibility Principle, you should not change/modify the existing Class. To add or extend the functionality, you should only use Inheritance.
+
+---------------------------------
+The Liskov Substitution Principle (LSP)
+- Child classes should never break the parent class’ type definitions.
+- As simple as that, a subclass should override the parent class’ methods in a way that does not break functionality from a client’s point of view.
+------------------------------------
+The Interface Segregation Principle (ISP)
+- The interface-segregation principle (ISP) states that no client should be forced to depend on methods it does not use.
+- This principale states that once an interface becomes too fat, it needs to be split into smaller interfaces so that client of the interface will only know about the methods that pertain to them
+---------------------
+Dependency Inversion Principle
+
+1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+2. Abstractions should not depend upon details. Details should depend upon abstractions.
+
+ref:
+https://medium.com/android-news/android-development-the-solid-principles-3b5779b105d2
+https://proandroiddev.com/exploring-s-o-l-i-d-principle-in-android-a90947f57cf0
+

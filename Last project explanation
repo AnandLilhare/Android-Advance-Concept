@@ -1,0 +1,9 @@
+Last project explanation
+
+Blackline Connect/Loner Mobile
+
+Loner Mobile provides safety monitoring platform to employees often work alone. It allows the user to call for help using the SOS alert and periodically confirm user safety using the configurable check-in timer. It continues to send user location to the server. Loner mobile app also connection optional BLE devices such as Duo and SOS Button.
+Designed for employees working alone or in unpredictable environments, the app communicates with monitoring personnel who are empowered to manage optimized emergency responses should an employee require help.
+
+
+Location Service:

@@ -9,7 +9,7 @@ What are the special reasons to use Flow instead of LiveData ?
 
 LiveData Library is a part of Android Framework. Flow is a part of Kotlin Language.
 
-When we are building KMM(Kotlin Multiplatform Mobile) applications for both Android and IOS , it is required to      keep as much as possible codes in pure Kotlin, so we can share them between both platform specific code bases.
+When we are building KMM(Kotlin Multiplatform Mobile) applications for both Android and IOS , it is required to  keep as much as possible codes in pure Kotlin, so we can share them between both platform specific code bases.
 
 If we use Flow, we will be able to use repository and other data source classes(data layer)  written in Kotlin as a part of the code base of IOS app.
 

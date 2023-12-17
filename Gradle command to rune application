@@ -1,0 +1,14 @@
+Gradle command to rune application
+
+
+To run an Android application using Gradle, you typically use the installDebug or install task, depending on your build configuration. Here are the basic commands:
+
+./gradlew installDebug
+./gradlew installRelease
+./gradlew installRelease
+
+To see a list of all available build tasks for your project, execute tasks:
+gradlew tasks
+
+Build an app bundle with Gradle
+./gradlew :base:bundleDebug

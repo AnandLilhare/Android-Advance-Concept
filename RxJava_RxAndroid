@@ -77,7 +77,7 @@ RxJava Operator:
 Creating Observables: 
 1. Just :-The just operator convert an item into an Observable that emits the items.
          - Just operator emits only onces 
-2. FromArray : - onvert various other objects and data types into Observables
+2. FromArray : - Convert various other objects and data types into Observables
                - It is emits one value at a time from array.
 3. Range : - create an Observable that emits a particular range of sequential integers
            

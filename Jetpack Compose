@@ -10,17 +10,17 @@ https://developer.android.com/jetpack/compose/documentation
 
 In Jetpack Compose, there are 3 simple ways to arrange user interface elements
 
-Column
-row 
-box: Box()can contain one or more childern, it belongs to the androidx.compose.foundation.layout package. They are positioned inside the box accroding to the content Alignment parameter.
+Box: Box()can contain one or more childern, it belongs to the androidx.compose.foundation.layout package. They are positioned inside the box accroding to the content Alignment parameter.
+
+Row:
+1. HorizontalArrangement: there is six type of vertical arragement
+2. VerticalAlignment: there is three horixontal Alignment.
 
 Column:
 1. VerticalArragment: there is six type of vertical arragement
 2. horizontalAlignment: there is three horixontal Alignment.
 
-Row:
-1. HorizontalArrangement: there is six type of vertical arragement
-2. VerticalAlignment: there is three horixontal Alignment.
+
 
 General Note:
 
@@ -64,16 +64,44 @@ If that data is modified inside the composable, you should use MutableState.
 Moving state to a composable's caller by receiving a state is called state hoisting
 BoxWithConstraints(): A composable that defines its own content according to the available space, based on the incoming constraints or the current LayoutDirection
 Modifier.width(min(400.dp, maxWidth)) : The width of the column is either 400 density-independent pixels or maxWidth, depending on which value is smaller
+
+Exploring the key principles of compose.
+
+Composable function emit UI elements.
+Layout() belong to the androidx.compose.ui.layout package. It is the core composable function for the layout, with its purpose being to size and position.
+When we speak of composable functions emitting the UI elements, we mean that nodes are added to data structure that are internal to jetpack compose. This will eventully lead to UI elements being visiable.
+Composable side effect: Try to make your composable side effect-free. Having no side effect means calling a function repeatedly with same set of arguments that will always produce the same result. Besides getting all the relevant data from the caller, being free of side effect also reuires not relying on global properties or calling function that return upredicatable value.
+Modifier: Modifer is both an interface and a Companion object.
+background(): background() is an extension functon of Modifier.
+
+ContstraintLayout() - it use a domain-specific language(DSL) to define the localion and size of a UI element relative to other ons. Therefore each composable in a ConstraintLayout must have a refenece associated with it, which is createRefs().
+- Constraints are provide using the constrainAs modifier.
+- Its lambda expression receives a ConstrainScope. It includes proper ties such as start, top, and bottom. These are called anchors becaouse they define a locatio that can be linked(using linkTO())
+to the location of another composable.
+
+
+Managing the State of your Composable Function:
+
+1. State: State as data that can change over the time.
+2. The androidx.compose.runtime.State base interface defines a value holder an object that stores a value of a particular type in a property name value.
+3. Internally the current RecomposeScope interface will be subscribed to change of that value.
+4. State must be an implementation of MustableState.
+5. The easiest way to create State instance is to invoke mutableStateOf(). This function returns a new MutableState instance.
+6. We can change the value of val type variable because num holds the reference to a mutable value holder.
+remember is inline function.
+7.You can pass any number of keys to remember {}. if one of them has changed since the previous composition, the calculation is reevaluated, and the new value is remembered and returned.
+
+
+Writing stateless composable functions
+- remember {} make a composable function stateful. A stateless composable, on the other hand, doesn't hold any state.
+- Following rule should follow 
+   - Fast: Your composable must not do heavy(that is, time- cunsuming) computation. Never invoke a web  service or do any other I/O. Data that is used by composable should be passed to it.
+   - Free of side-effects: Do not modify global properties or produce unintended observable effect (Modifying state that has been passed to a composable is certainly intentional)
+-  Idempotent: Do not use remember {}, do not access global properties and do not call upredicatable code.
+
 remember: 
 
 Complementary() is an extension function of color.
-
-
-
-
-
-
-
 
 Context in compose - To get context for compose like within the button
 val context = LocalContext.current
@@ -82,7 +110,6 @@ SnackBar in JetPackCompose
 
 There is two think require to implement snackbar
 1. A Scaffold State
-
 2. A Coroutine Scope
 
 RecycleView in JetPackCompose
@@ -107,19 +134,14 @@ https://developer.android.com/jetpack/compose/state-hoisting
 rememberSaveable: It is use for persist the date to clear whent rotating and configuration change of devices
 ex:var count by rememberSaveable{mutableStateOf(0)}
 
-State Flow:
-StateFlow is a state-holder observable flow that emits the current and new state updates to its collectors. The current state value can also be read through its value property. To update state and send it to the flow, assign a new value to the value property of the MutableStateFlow class
 
-LiveData vs StateFlow
-1.LiveData does not take an inital value.So we need to check for nullabilty
-2.StateFlow need to intial value. So no need to check nullablity.
-3.Livedata automatically unregister the consumers, when the view goes to stopped state.
-4.StateFlow does not do that default, we need to use it with lifecycleScope for that
-5.LiveData is part of Android Framework. So we can only use the code for Android Developement.
-6.StateFlow is part of Kotlin language. SO we can use it for Kotlin Multiplatlform projects.
+JetPack Compose Interview Question 
 
-ShareFlow:
-The shareIn function returns a SharedFlow, a hot flow that emits values to all consumers that collect from it. A SharedFlow is a highly-configurable generalization of StateFlow.
+
+
+
+
+
 
 
 

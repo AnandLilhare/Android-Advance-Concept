@@ -23,18 +23,38 @@ CoroutineScope(Dispatchers.IO).launch {
                 
             }
 
- CoroutineScope: is an interface to provide scope to corotine. In kotlin coroutin there is another scope is Golbal scope which are working in whole application lifecycle.
+Coroutines concepts: 
+
+CoroutineScope: is an interface to provide scope to corotine. In kotlin coroutin there is another scope is Golbal scope which are working in whole application lifecycle.A CoroutineScope keeps track of any coroutine it creates using launch or async. The ongoing work (i.e. the running coroutines) can be cancelled by calling scope.cancel() at any point in time.
+
+viewModelScope:
+viewModelScope, the ViewModel class cancels the scope automatically for you in the ViewModel's onCleared() method.
+
+
+Dispatcher:
+Kotlin coroutines use dispatchers to determine which threads are used for coroutine execution. To run code outside of the main thread, you can tell Kotlin coroutines to perform work on either the Default or IO dispatcher. In Kotlin, all coroutines must run in a dispatcher, even when they're running on the main thread. Coroutines can suspend themselves, and the dispatcher is responsible for resuming them.
  
- Dispatcher.io is context of coroutine, it decripe the kind of thread that they run on coroutines.
-  Dispatchers.io : Coroutin will run in background thread from a shared pool of on-demand created thread.
-  Dispatchers.Main: it will start from main thread after that it will run in background thread.
-  Dispatchers.Default: it is use for CPU intensive task such as sorting a large list.
-  Dispatchers.Unconfined: this is use for Golbal scope, it'll run in the current thread, but if it is suspended and resumed it will run suspended function's thread.
+Dispatcher.io is context of coroutine, it decripe the kind of thread that they run on coroutines.
+Dispatchers.IO indicates that this coroutine should be executed on a thread reserved for I/O operations.
+
+To specify where the coroutines should run, Kotlin provides three dispatchers that you can use:
+
+1.Dispatchers.io : Coroutin will run in background thread from a shared pool of on-demand created thread.
+This dispatcher is optimized to perform disk or network I/O outside of the main thread. Examples include using the Room component, reading from or writing to files, and running any network operations.
+
+2.Dispatchers.Main: Use this dispatcher to run a coroutine on the main Android thread. This should be used only for interacting with the UI and performing quick work. Examples include calling suspend functions, running Android UI framework operations, and updating LiveData objects.
+
+3.Dispatchers.Default: it is use for CPU intensive task such as sorting a large list.
+This dispatcher is optimized to perform CPU-intensive work outside of the main thread. Example use cases include sorting a list and parsing JSON.
+
+4.Dispatchers.Unconfined: this is use for Golbal scope, it'll run in the current thread, but if it is suspended and resumed it will run suspended function's thread.
 
 3. launch is builder to start coroutine.
+  launch is a function that creates a coroutine and dispatches the execution of its function body to the corresponding dispatcher.
+
   There are four builder
-  a. lunch : it is launch new coroutine without blocking the current thread. We use this builder when coroutine does not return any value.
-  b. async: it is launch new coroutine without blocking the current thread. it is return an instance of deferred value. We use this builder when coroutine does have return any value.
+  a. lunch : it is launch new coroutine without blocking the current thread. We use this builder when coroutine does not return any value.Any work that is considered "fire and forget" can be started using launch.
+  b. async: it is launch new coroutine without blocking the current thread. it is return an instance of deferred value. We use this builder when coroutine does have return any value.starts a new coroutine and allows you to return a result with a suspend function called await.
   c. produce: This builder is for coroutine which produces a stream of element. Returns of instances of receive channel.
   d. runBlocking: The coroutine we create using this thread will block the thread while the coroutine is executing.
      Returns a result of type T.
@@ -55,6 +75,8 @@ Coroutin Suspend fuction
 
 In Kotlin Corountinew, whenever a coroutin is suspended, the current stack fram of the function is copied and saved in the memory. 
 When the function resumes after completing its task, the stack frame is copie back from where it was saved and starts running again.
+
+Kotlin uses a stack frame to manage which function is running along with any local variables. When suspending a coroutine, the current stack frame is copied and saved for later. When resuming, the stack frame is copied back from where it was saved, and the function starts running again. Even though the code might look like an ordinary sequential blocking request, the coroutine ensures that the network request avoids blocking the main thread.
 
 Suspending Fuction.
 1. WithContext
